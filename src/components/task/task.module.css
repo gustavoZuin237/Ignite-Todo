@@ -1,0 +1,59 @@
+.task {
+    width: 46rem;
+    height: 4.5rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--gray-500);
+    border: 1px solid var(--gray-400);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.task div {
+    height: 100%;
+    display: flex;
+}
+
+.task input[type="checkbox"] {
+    appearance: none;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 100%;
+    border: 2px solid var(--blue);
+    background-color: transparent;
+}
+
+.task input[type="checkbox"]:hover {
+    background-color: var(--blue-dark);
+}
+
+.task input[type="checkbox"]:checked {
+    background-image: url("/src/assets/checked.svg");
+    background-color: var(--purple-dark);
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 0;
+}
+
+.task img {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.task img:hover {
+    color: var(--danger);
+    background-color: var(--gray-400);
+    border-radius: 4px;
+}
+
+.task p {
+    font-size: 0.875rem;
+    color: var(--gray-100);
+    margin-inline: 0.75rem;
+    font-weight: normal;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: var(--gray-300);
+}

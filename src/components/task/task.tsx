@@ -4,25 +4,24 @@ import Trash from "/src/assets/trash.svg";
 interface TaskProps {
   content: string;
   isChecked: boolean;
-  id: string;
+  index: number;
   checkCompletedTasks: Function;
   deleteTask: Function;
 }
 
 export function Task({
   content,
+  isChecked,
   checkCompletedTasks,
   deleteTask,
-  id,
+  index,
 }: TaskProps) {
   function checkCompletedTask() {
-    document.getElementById("content")!.style.textDecoration = "line-through"
-    document.getElementById("content")!.style.color = "var(--gray-300)"
-    checkCompletedTasks();
+    checkCompletedTasks(index);
   }
 
   function deleteTasks() {
-    deleteTask(id);
+    deleteTask(index);
   }
 
   return (
@@ -30,11 +29,12 @@ export function Task({
       <div className={styles.task}>
         <div>
           <input
+            checked={isChecked}
             onChange={checkCompletedTask}
             type="checkbox"
             className={styles.checkbox}
           ></input>
-          <p id="content">{content}</p>
+          <p>{content}</p>
         </div>
         <img onClick={deleteTasks} src={Trash} />
       </div>

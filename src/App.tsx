@@ -25,21 +25,30 @@ export function App() {
       ]);
 
       setTotalTaskCount(totalTaskCount + 1);
+      setTask("");
       hideEmptyTaskList(event);
     }
   }
 
-  function checkCompletedTasks() {
-    setCompletedTaskCount(completedTaskCount + 1);
+  function checkCompletedTasks(index) {
+
+    const newTasks = [...taskList];
+    newTasks[index].isChecked = true;
+    setTaskList(newTasks);
+
+    const taskListWithoutCompleted = taskList.filter((task) => {
+      return task.isChecked == true;
+    });
+    setCompletedTaskCount(taskListWithoutCompleted.length);   
   }
 
-  function deleteTasks(id: string) {
-    setTotalTaskCount(totalTaskCount - 1);
-
+  function deleteTasks(index) {
     const taskListWithoutDeleted = taskList.filter((task) => {
-      return task.id !== id;
+      let taskIndex = taskList.indexOf(task);
+      return taskIndex !== index;
     });
-
+    
+    setTotalTaskCount(taskListWithoutDeleted.length)
     setTaskList(taskListWithoutDeleted);
   }
 
@@ -61,6 +70,7 @@ export function App() {
           onChange={(e) => {
             setTask(e.target.value);
           }}
+          value={task}
           type="text"
           placeholder="Adicione uma nova tarefa"
         />
@@ -86,15 +96,17 @@ export function App() {
       <div id="taskList" className="taskList">
         <div id="emptyTaskList">
           <img className="clipboard" src={Clipboard} alt="" />
-          <p className="boldTaskListText">Você ainda não tem tarefas cadastradas</p>
+          <p className="boldTaskListText">
+            Você ainda não tem tarefas cadastradas
+          </p>
           <p>Crie tarefas e organize seus itens a fazer</p>
         </div>
 
-        {taskList.map((task) => {
+        {taskList.map((task, index) => {
           return (
             <Task
-              key={task.id}
-              id={task.id}
+              key={index}
+              index={index}
               content={task.title}
               isChecked={task.isChecked}
               checkCompletedTasks={checkCompletedTasks}

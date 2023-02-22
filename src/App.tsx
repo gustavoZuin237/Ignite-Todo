@@ -9,7 +9,6 @@ import { EmptyTaskList } from "./components/emptyTaskList/emptyTaskList";
 export function App() {
   const [task, setTask] = useState("");
   const [taskList, setTaskList] = useState([]);
-
   const [totalTaskCount, setTotalTaskCount] = useState(taskList.length);
 
   function createNewTask() {

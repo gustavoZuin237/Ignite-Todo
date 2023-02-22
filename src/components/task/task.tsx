@@ -21,6 +21,7 @@ export function Task({
   }
 
   function deleteTasks() {
+    console.log(index)
     deleteTask(index);
   }
 
@@ -34,7 +35,7 @@ export function Task({
             type="checkbox"
             className={styles.checkbox}
           ></input>
-          <p>{content}</p>
+          <p className={isChecked ? styles.completed : styles.incompleted}>{content}</p>
         </div>
         <img onClick={deleteTasks} src={Trash} />
       </div>

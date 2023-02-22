@@ -1,62 +1,47 @@
 import Rocket from "/src/assets/Logo.svg";
 import { PlusCircle } from "phosphor-react";
-import Clipboard from "/src/assets/Clipboard.svg";
 
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { Task } from "./components/task/task";
+import { EmptyTaskList } from "./components/emptyTaskList/emptyTaskList";
 
 export function App() {
   const [task, setTask] = useState("");
   const [taskList, setTaskList] = useState([]);
 
   const [totalTaskCount, setTotalTaskCount] = useState(taskList.length);
-  const [completedTaskCount, setCompletedTaskCount] = useState(0);
 
   function createNewTask() {
     if (task !== "") {
       setTaskList([
-        ...taskList,
         {
           id: uuidv4(),
           title: task,
           isChecked: false,
         },
+        ...taskList
       ]);
 
       setTotalTaskCount(totalTaskCount + 1);
       setTask("");
-      hideEmptyTaskList(event);
     }
   }
 
-  function checkCompletedTasks(index) {
-
+  function checkCompletedTasks(index: number) {
     const newTasks = [...taskList];
-    newTasks[index].isChecked = true;
+    newTasks[index]['isChecked'] = true; //! ???????????????????????????????????????????
     setTaskList(newTasks);
-
-    const taskListWithoutCompleted = taskList.filter((task) => {
-      return task.isChecked == true;
-    });
-    setCompletedTaskCount(taskListWithoutCompleted.length);   
   }
 
-  function deleteTasks(index) {
+  function deleteTasks(index: number) {
     const taskListWithoutDeleted = taskList.filter((task) => {
       let taskIndex = taskList.indexOf(task);
       return taskIndex !== index;
     });
-    
-    setTotalTaskCount(taskListWithoutDeleted.length)
-    setTaskList(taskListWithoutDeleted);
-  }
 
-  function hideEmptyTaskList(event: MouseEvent) {
-    event.preventDefault();
-    document.getElementById("emptyTaskList")!.style.display = "none";
-    document.getElementById("taskList")!.style.border = "0";
-    document.getElementById("taskList")!.style.paddingTop = "0";
+    setTotalTaskCount(taskListWithoutDeleted.length);
+    setTaskList(taskListWithoutDeleted);
   }
 
   return (
@@ -88,27 +73,22 @@ export function App() {
         <div className="completedTasks">
           <p>Concluídas</p>
           <div className="counter">
-            {completedTaskCount} de {totalTaskCount}
+            {taskList.filter((task) => task['isChecked'] === true).length} de{" "}
+            {totalTaskCount}
           </div>
         </div>
       </div>
 
       <div id="taskList" className="taskList">
-        <div id="emptyTaskList">
-          <img className="clipboard" src={Clipboard} alt="" />
-          <p className="boldTaskListText">
-            Você ainda não tem tarefas cadastradas
-          </p>
-          <p>Crie tarefas e organize seus itens a fazer</p>
-        </div>
+        {taskList.length == 0 && <EmptyTaskList />}
 
         {taskList.map((task, index) => {
           return (
             <Task
               key={index}
               index={index}
-              content={task.title}
-              isChecked={task.isChecked}
+              content={task['title']}
+              isChecked={task['isChecked']}
               checkCompletedTasks={checkCompletedTasks}
               deleteTask={deleteTasks}
             />

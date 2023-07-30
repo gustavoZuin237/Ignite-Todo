@@ -1,4 +1,6 @@
+// @ts-ignore
 import Rocket from "/src/assets/Logo.svg";
+// @ts-ignore
 import { PlusCircle } from "phosphor-react";
 
 import { v4 as uuidv4 } from "uuid";
@@ -6,9 +8,15 @@ import { useState } from "react";
 import { Task } from "./components/task/task";
 import { EmptyTaskList } from "./components/emptyTaskList/emptyTaskList";
 
+interface TaskI {
+  id: string
+  title: string
+  isChecked: boolean
+}
+
 export function App() {
   const [task, setTask] = useState("");
-  const [taskList, setTaskList] = useState([]);
+  const [taskList, setTaskList] = useState<TaskI[]>([]);
   const [totalTaskCount, setTotalTaskCount] = useState(taskList.length);
 
   function createNewTask() {
@@ -29,7 +37,7 @@ export function App() {
 
   function checkCompletedTasks(index: number) {
     const newTasks = [...taskList];
-    newTasks[index]['isChecked'] = true; //! ???????????????????????????????????????????
+    newTasks[index]['isChecked'] = true;
     setTaskList(newTasks);
   }
 

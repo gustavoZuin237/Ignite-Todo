@@ -1,4 +1,6 @@
+// @ts-ignore
 import styles from "./task.module.css";
+// @ts-ignore
 import Trash from "/src/assets/trash.svg";
 
 interface TaskProps {

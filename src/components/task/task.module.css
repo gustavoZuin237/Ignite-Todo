@@ -21,6 +21,8 @@
     border-radius: 100%;
     border: 2px solid var(--blue);
     background-color: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
 .task input[type="checkbox"]:hover {
@@ -33,11 +35,14 @@
     background-position: center;
     background-repeat: no-repeat;
     border: 0;
+    cursor: not-allowed;
 }
 
 .task img {
     width: 1.5rem;
     height: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
 .task img:hover {

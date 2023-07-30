@@ -1,4 +1,6 @@
+// @ts-ignore
 import Clipboard from "/src/assets/Clipboard.svg";
+// @ts-ignore
 import styles from "./emptyTaskList.module.css"
 
 export function EmptyTaskList() {

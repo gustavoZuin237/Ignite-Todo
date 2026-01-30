@@ -23,7 +23,6 @@ export function Task({
   }
 
   function deleteTasks() {
-    console.log(index)
     deleteTask(index);
   }
 

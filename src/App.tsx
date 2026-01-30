@@ -1,5 +1,5 @@
 // @ts-ignore
-import Rocket from "/src/assets/Logo.svg";
+import Rocket from "./assets/Logo.svg";
 // @ts-ignore
 import { PlusCircle } from "phosphor-react";
 
